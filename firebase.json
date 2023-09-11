@@ -1,0 +1,14 @@
+{
+  "hosting": [
+    {
+      "public": "out",
+      "site": "swap-havendao",
+      "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    }
+  ]
+}
