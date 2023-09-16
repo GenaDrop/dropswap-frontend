@@ -36,7 +36,7 @@ import { TransactionManager } from 'near-transaction-manager';
 import { functionCall } from 'near-api-js/lib/transaction';
 import verifiedContracts from '../lib/verifiedContracts';
 
-const SWAP_CONTRACT = 'v1.havenswap.near'
+const SWAP_CONTRACT = 'swap.genadrop.near'
 
 const { Contract, KeyPair, connect, keyStores } = nearAPI;
 

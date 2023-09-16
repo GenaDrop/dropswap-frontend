@@ -65,7 +65,7 @@ const getFetcher = (url) => fetch(url).then((res) => res.json());
 
 // end of testing stuff
 
-const SWAP_CONTRACT = 'v1.havenswap.near'
+const SWAP_CONTRACT = 'swap.genadrop.near'
 
 const sentNFTs = [];
 const receiveNFTs = [];
@@ -457,6 +457,7 @@ const Main = ({ nearId, query }) => {
 
 		const { near, wallet } = await getWallet();
 		const transactionManager = TransactionManager.fromWallet(wallet);
+		near.connection.provider.query
 		
 		const nearString = nearAttached.current.value+0
 		let nearFees = ''; 
@@ -565,11 +566,24 @@ const Main = ({ nearId, query }) => {
 		if ((walletName.endsWith('.near') || walletName.length >= 64 ) && (walletName !== nearId) && finishLoading &&
 		/^(([a-z\d]+[\-_])*[a-z\d]+\.)*([a-z\d]+[\-_])*[a-z\d]+$/.test(walletName) ) {
 
-			const response = await provider.query({
+			console.log("chnaged mes====", provider)
+			const { near, wallet } = await getWallet();
+			const response = await near.connection.provider.query({
 				request_type: 'view_account',
 				finality: 'final',
 				account_id: walletName,
-			}).catch((err) => {})
+			}).catch((err) => {
+				console.log("error.....", err)
+			})
+			
+
+			// const response = await provider.query({
+			// 	request_type: 'view_account',
+			// 	finality: 'final',
+			// 	account_id: walletName,
+			// }).catch((err) => {
+			// 	console.log("errrooo======")
+			// })
 
 			// now do a api call to check if the wallet exists
 			const recipientContracts = await getFetcher(`https://api.kitwallet.app/account/${walletName}/likelyNFTs`).catch((err) => {});
